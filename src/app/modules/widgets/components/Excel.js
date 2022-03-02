@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import XLSX from "xlsx";
 import InputFiles from "react-input-files";
 import { saveAs } from "file-saver";
-import Grid from '@mui/material/Grid';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Grow from '@mui/material/Grow';
+import Grid from '@mui/material/Grid';
 import DataTable from '../../../../_metronic/partials/widgets/excel/DataTable';
 import Tooltip from '@mui/material/Tooltip';
 import useStoreModal from '../../../../_metronic/alert/PromptModal'
@@ -16,6 +16,7 @@ export default function Excel() {
     const DownloadExcel = () => {
         saveAs(ExcelRead, `excel - ${new Date()}.xlsx`)
     }
+    console.log(Rows,'Rows')
     React.useEffect(() => {
         excelPrompt()
     }, [])//eslint-disable-line

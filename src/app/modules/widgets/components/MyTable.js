@@ -5,7 +5,9 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import MuiTablePagination from "@mui/material/TablePagination";
 import useStoreModal from '../../../../_metronic/alert/PromptModal'
-export default function CustomerForm() {
+import Grow from '@mui/material/Grow';
+import Grid from '@mui/material/Grid';
+export default function MyTable() {
     const [columns, setColumns] = useState([]);
     const [control, setControl] = useState(false);
     const { myTablePrompt } = useStoreModal();
@@ -19,6 +21,7 @@ export default function CustomerForm() {
                         whiteSpace: "nowrap",
                         position: "sticky",
                         left: "0",
+                        backgroundColor:index%(index/5)===2?'white':'gray',
                         zIndex: 0
                     }
                 }),
@@ -42,18 +45,32 @@ export default function CustomerForm() {
     }, [])//eslint-disable-line
 
     return (
-        <>
-            {
-                control ?
-                    <MUIDataTable
-                        title={"消費者列表"}
-                        data={data}
-                        columns={columns}
-                        options={options}
-                    />
-                    : null
-            }
-        </>
+        <div className='row g-12 g-xl-12'>
+            <div className='col-xl-12'>
+                <div className='card card-xl-stretch mb-xl-12' style={{ minHeight: '300px' }}>
+                    <div className='card-body '>
+                        <Grow
+                            in={true}
+                            style={{ transformOrigin: '0 0 0' }}
+                            {...(true ? { timeout: 1000 } : {})}
+                        >
+                            <Grid >
+                                {
+                                    control ?
+                                        <MUIDataTable
+                                            title={"消費者列表"}
+                                            data={data}
+                                            columns={columns}
+                                            options={options}
+                                        />
+                                        : null
+                                }
+                            </Grid>
+                        </Grow>
+                    </div>
+                </div>
+            </div >
+        </div >
     )
 }
 const options = {
