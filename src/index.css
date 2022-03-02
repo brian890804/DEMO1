@@ -1,0 +1,14 @@
+p{
+    margin-top: auto !important;
+    margin-bottom:auto !important;
+}
+
+.toolbar-fixed .toolbar{
+    z-index: 990!important;
+}
+.aside-enabled.aside-fixed.header-fixed .header{
+    z-index: 990!important;
+}
+.aside-fixed .aside{
+    z-index: 999!important;
+}

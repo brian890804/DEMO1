@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './index.css'
 // Redux
 // https://github.com/rt2zz/redux-persist
 import {PersistGate} from 'redux-persist/integration/react'

@@ -1,114 +1,236 @@
-import React, { useState, useMemo, useEffect } from 'react'
-import ReactTable from '../../../../_metronic/partials/widgets/mytable/ReactTable'
-import makeData from './makeData'
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import Grow from '@mui/material/Grow';
-import Grid from '@mui/material/Grid';
+import React, { useState } from 'react'
+import MUIDataTable from "mui-datatables";
+import TableFooter from '@mui/material/TableFooter';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import MuiTablePagination from "@mui/material/TablePagination";
 import useStoreModal from '../../../../_metronic/alert/PromptModal'
-function App() {
+export default function CustomerForm() {
+    const [columns, setColumns] = useState([]);
+    const [control, setControl] = useState(false);
     const { myTablePrompt } = useStoreModal();
-    myTablePrompt();
-    const columns = useMemo(
-        () => [
-            {
-                Header: '姓名',
-                columns: [
-                    {
-                        Header: '姓氏',
-                        accessor: 'firstName',
-                    },
-                    {
-                        Header: '姓名',
-                        accessor: 'lastName',
-                    },
-                ],
-            },
-            {
-                Header: '資訊',
-                columns: [
-                    {
-                        Header: '年齡',
-                        accessor: 'age',
-                    },
-                    {
-                        Header: '參訪',
-                        accessor: 'visits',
-                    },
-                    {
-                        Header: '狀態',
-                        accessor: 'status',
-                    },
-                    {
-                        Header: '進度',
-                        accessor: 'progress',
-                    },
-                ],
-            },
-        ],
-        []
-    )
-    const [title, setTitle] = useState(columns);
-    const [data, setData] = useState(() => makeData(20))
-    const [originalData] = useState(data)
-    const [skipPageReset, setSkipPageReset] = useState(false)
-
-    const updateMyData = (rowIndex, columnId, value) => {
-        setSkipPageReset(true)
-        setData(old =>
-            old.map((row, index) => {
-                if (index === rowIndex) {
-                    return {
-                        ...old[rowIndex],
-                        [columnId]: value,
+    function createData(request, index) {
+        myTablePrompt();
+        let data = columns;
+        data.push({
+            name: request, options: {
+                filter: true, setCellProps: () => ({
+                    style: {
+                        whiteSpace: "nowrap",
+                        position: "sticky",
+                        left: "0",
+                        zIndex: 0
                     }
-                }
-                return row
-            })
-        )
+                }),
+                setCellHeaderProps: () => ({
+                    style: {
+                        whiteSpace: "nowrap",
+                        position: "sticky",
+                        left: 0,
+                        zIndex: 0
+                    }
+                })
+            },
+        }) //篩選條件可用index設定
+        setColumns(data)
     }
-    useEffect(() => {
-        setSkipPageReset(false)
-    }, [data])
-    const resetData = () => setData(originalData)
-    const addData = () => {
-        let random = Math.random()
-        let newData = [...title]
-        newData[1].columns.push({
-            Header: 'test' + random.toString(),
-            accessor: 'test' + random.toString(),
-        })
-        setTitle(newData)
-    }
+    React.useEffect(() => {
+        if (!columns.length) {
+            rowColumns.forEach((data, index) => createData(data, index))
+        }
+        setControl(true)
+    }, [])//eslint-disable-line
+
     return (
-        <div className='row g-12 g-xl-12'>
-            <div className='col-xl-12'>
-                <div className='card card-xl-stretch mb-xl-8' style={{ minHeight: '300px' }}>
-                    <div className='card-body '>
-                        <Grow
-                            in={true}
-                            sx={{ transformOrigin: '0 0 0' }}
-                            {...(true ? { timeout: 1000 } : {})}
-                        >
-                            <Grid container alignItems='center' justifyContent="center" sx={{ backgroundColor: '#3C3C3C', borderRadius: 2 }}>
-                                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <span style={{ margin: 5 }}><Button variant="contained" startIcon={<DeleteIcon />} onClick={resetData}>重設資料</Button></span>
-                                    <span><Button variant="contained" color="success" startIcon={<AddIcon />} onClick={() => addData()}>新增欄位</Button></span>
-                                </span>
-                                <ReactTable
-                                    columns={title}
-                                    data={data}
-                                    updateMyData={updateMyData}
-                                    skipPageReset={skipPageReset}
-                                />
-                            </Grid>
-                        </Grow>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <>
+            {
+                control ?
+                    <MUIDataTable
+                        title={"消費者列表"}
+                        data={data}
+                        columns={columns}
+                        options={options}
+                    />
+                    : null
+            }
+        </>
     )
 }
+const options = {
+    filterType: 'dropdown',
+    responsive: 'vertical',
+    elevation: 10,
+    // tableBodyHeight: (window.innerHeight / 2.2),
+    draggableColumns: { enabled: true },//欄位拖曳
+    onDownload: (buildHead, buildBody, columns, data) => {//不加這個中文會亂碼
+        return "\uFEFF" + buildHead(columns) + buildBody(data)
+    },
+    customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage, textLabels) => {
+        return (
+            <CustomFooter
+                count={count}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                changeRowsPerPage={changeRowsPerPage}
+                changePage={changePage}
+                textLabels={textLabels}
+            />
+        );
+    },
+    customTableBodyFooterRender: ({ columns, data, selectableRows }) => {
+        return (
+            <CustomTableBodyFooterRender
+                data={data}
+                columns={columns}
+                selectableRows={selectableRows}
+            />
+        );
+    },
+    textLabels: {
+        body: {
+            noMatch: "沒有搜尋到相同的資料",
+            toolTip: "排序",
+            columnHeaderTooltip: column => `${column.label}`
+        }, pagination: {
+            next: "下一頁",
+            previous: "上一頁",
+            rowsPerPage: "總頁數:",
+            displayRows: "共",
+        },
+        toolbar: {
+            search: "搜尋",
+            downloadCsv: "下載CSV檔",
+            print: "影印",
+            viewColumns: "選擇顯示欄位",
+            filterTable: "篩選表格",
+        }, filter: {
+            all: "All",
+            title: "篩選",
+            reset: "重設",
+        }, viewColumns: {
+            title: "顯示欄位",
+        }, selectedRows: {
+            text: "行 被選擇",
+            delete: "刪除",
+            deleteAria: "刪除所選欄位",
+        },
+    }
+};
 
-export default App
+function CustomTableBodyFooterRender(opts) {
+    let avgAge =
+        opts.data.reduce((accu, item) => {
+            return accu + item.data[3];
+        }, 0) / opts.data.length;
+
+    let avgSalary =
+        opts.data.reduce((accu, item) => {
+            return accu + item.data[4];
+        }, 0) / opts.data.length;
+    avgAge = Math.round(avgAge);
+    avgSalary = Math.round(avgSalary);
+    return (
+        <TableFooter >
+            <TableRow>
+                {opts.selectableRows !== 'none' ? <TableCell /> : null}
+                {opts.columns?.map((col, index) => {
+                    if (col.display === 'true') {
+                        if (col.name === '年齡') {
+                            return (
+                                <TableCell key={index} >
+                                    平均: {avgAge}
+                                </TableCell>
+                            );
+                        } else if (col.name === '薪資') {
+                            return (
+                                <TableCell key={index} >
+                                    平均: {avgSalary}
+                                </TableCell>
+                            );
+                        } else {
+                            return <TableCell key={index} />;
+                        }
+                    }
+                    return null;
+                })}
+            </TableRow>
+        </TableFooter>
+    );
+};
+
+function CustomFooter(props) { //目前沒有客製化 可用可不用
+    const { count, textLabels, rowsPerPage, page } = props;
+    const handleRowChange = event => {
+        props.changeRowsPerPage(event.target.value);
+    };
+
+    const handlePageChange = (_, page) => {
+        props.changePage(page);
+    };
+    const footerStyle = {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        padding: '0px 24px 0px 24px',
+    };
+    return (
+        <TableFooter>
+            <TableRow>
+                <TableCell style={footerStyle} colSpan={1000}>
+                    <MuiTablePagination
+                        component="div"
+                        count={count}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        labelRowsPerPage={textLabels.rowsPerPage}
+                        labelDisplayedRows={({ from, to, count }) => `${from}-${to}筆 ${textLabels.displayRows} ${count}筆`}
+                        backIconButtonProps={{
+                            'aria-label': textLabels.previous,
+                        }}
+                        nextIconButtonProps={{
+                            'aria-label': textLabels.next,
+                        }}
+                        rowsPerPageOptions={[10, 20, 100]}
+                        onRowsPerPageChange={handleRowChange}
+                        onPageChange={handlePageChange}
+                    />
+                </TableCell>
+            </TableRow>
+        </TableFooter>
+    );
+
+
+};
+const rowColumns = ["姓名", "標題", "位置", "年齡", "薪資"];
+const data = [
+    ['Gabby George', 'Business Analyst', 'Minneapolis', 30, 100000],
+    ['Aiden Lloyd', 'Business Consultant', 'Dallas', 55, 200000],
+    ['Jaden Collins', 'Attorney', 'Santa Ana', 27, 500000],
+    ['Franky Rees', 'Business Analyst', 'St. Petersburg', 22, 50000],
+    ['Aaren Rose', 'Business Consultant', 'Toledo', 28, 75000],
+    ['Blake Duncan', 'Business Management Analyst', 'San Diego', 65, 94000],
+    ['Frankie Parry', 'Agency Legal Counsel', 'Jacksonville', 71, 210000],
+    ['Lane Wilson', 'Commercial Specialist', 'Omaha', 19, 65000],
+    ['Robin Duncan', 'Business Analyst', 'Los Angeles', 20, 77000],
+    ['Mel Brooks', 'Business Consultant', 'Oklahoma City', 37, 135000],
+    ['Harper White', 'Attorney', 'Pittsburgh', 52, 420000],
+    ['Kris Humphrey', 'Agency Legal Counsel', 'Laredo', 30, 150000],
+    ['Frankie Long', 'Industrial Analyst', 'Austin', 31, 170000],
+    ['Brynn Robbins', 'Business Analyst', 'Norfolk', 22, 90000],
+    ['Justice Mann', 'Business Consultant', 'Chicago', 24, 133000],
+    ['Addison Navarro', 'Business Management Analyst', 'New York', 50, 295000],
+    ['Jesse Welch', 'Agency Legal Counsel', 'Seattle', 28, 200000],
+    ['Eli Mejia', 'Commercial Specialist', 'Long Beach', 65, 400000],
+    ['Gene Leblanc', 'Industrial Analyst', 'Hartford', 34, 110000],
+    ['Danny Leon', 'Computer Scientist', 'Newark', 60, 220000],
+    ['Lane Lee', 'Corporate Counselor', 'Cincinnati', 52, 180000],
+    ['Jesse Hall', 'Business Analyst', 'Baltimore', 44, 99000],
+    ['Danni Hudson', 'Agency Legal Counsel', 'Tampa', 37, 90000],
+    ['Terry Macdonald', 'Commercial Specialist', 'Miami', 39, 140000],
+    ['Justice Mccarthy', 'Attorney', 'Tucson', 26, 330000],
+    ['Silver Carey', 'Computer Scientist', 'Memphis', 47, 250000],
+    ['Franky Miles', 'Industrial Analyst', 'Buffalo', 49, 190000],
+    ['Glen Nixon', 'Corporate Counselor', 'Arlington', 44, 80000],
+    ['Gabby Strickland', 'Business Process Consultant', 'Scottsdale', 26, 45000],
+    ['Mason Ray', 'Computer Scientist', 'San Francisco', 39, 142000],
+];
+
