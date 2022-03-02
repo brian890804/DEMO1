@@ -12,7 +12,7 @@ export default function MyTable() {
     const [control, setControl] = useState(false);
     const { myTablePrompt } = useStoreModal();
     function createData(request, index) {
-        myTablePrompt();
+        // myTablePrompt();
         let data = columns;
         data.push({
             name: request, options: {
@@ -21,7 +21,6 @@ export default function MyTable() {
                         whiteSpace: "nowrap",
                         position: "sticky",
                         left: "0",
-                        backgroundColor:index%(index/5)===2?'white':'gray',
                         zIndex: 0
                     }
                 }),
