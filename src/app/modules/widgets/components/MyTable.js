@@ -16,12 +16,13 @@ export default function MyTable() {
         let data = columns;
         data.push({
             name: request, options: {
-                filter: true, setCellProps: () => ({
+                filter: true,
+                setCellProps: () => ({
                     style: {
                         whiteSpace: "nowrap",
                         position: "sticky",
                         left: "0",
-                        zIndex: 0
+                        zIndex: '0px !important' 
                     }
                 }),
                 setCellHeaderProps: () => ({
@@ -29,7 +30,7 @@ export default function MyTable() {
                         whiteSpace: "nowrap",
                         position: "sticky",
                         left: 0,
-                        zIndex: 0
+                        zIndex: '0px !important' 
                     }
                 })
             },
@@ -57,6 +58,7 @@ export default function MyTable() {
                                 {
                                     control ?
                                         <MUIDataTable
+                                        style={{zIndex:0 +'!important'}}
                                             title={"消費者列表"}
                                             data={data}
                                             columns={columns}

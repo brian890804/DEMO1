@@ -51,6 +51,7 @@ export function AsideMenuMain() {
         <AsideMenuItem to='/crafted/widgets/carousel' title={intl.formatMessage({ id: 'MENU.WIDGETS.CAROUSEL' })} hasBullet={true} />
         <AsideMenuItem to='/crafted/widgets/lists' title={intl.formatMessage({ id: 'MENU.WIDGETS.LIST' })} hasBullet={true} />
         <AsideMenuItem to='/crafted/widgets/table' title={intl.formatMessage({ id: 'MENU.WIDGETS.TABLE' })} hasBullet={true} />
+        <AsideMenuItem to='/crafted/widgets/animation' title={intl.formatMessage({ id: 'MENU.WIDGETS.ANIMATION' })} hasBullet={true} />
         <AsideMenuItem to='/crafted/widgets/statistics' title={intl.formatMessage({ id: 'MENU.WIDGETS.STATISCICS' })} hasBullet={true} />
         <AsideMenuItem to='/crafted/widgets/charts' title={intl.formatMessage({ id: 'MENU.WIDGETS.CHART' })} hasBullet={true} />
         <AsideMenuItem to='/crafted/widgets/mixed' title={intl.formatMessage({ id: 'MENU.WIDGETS.MIXED' })} hasBullet={true} />

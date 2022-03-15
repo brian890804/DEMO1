@@ -10,6 +10,7 @@ import { Statistics } from './components/Statistics'
 import Excel from './components/Excel'
 import MyCarousel from './components/MyCarousel'
 import MyTable from './components/MyTable'
+import Animation from  './components/Animation'
 const widgetsBreadCrumbs: Array<PageLink> = [
   {
     title: 'Widgets',
@@ -38,6 +39,10 @@ const WidgetsPage: React.FC = () => {
       <Route path='/crafted/widgets/table'>
         <PageTitle breadcrumbs={widgetsBreadCrumbs}>Table</PageTitle>
         <MyTable />
+      </Route>
+      <Route path='/crafted/widgets/Animation'>
+        <PageTitle breadcrumbs={widgetsBreadCrumbs}>Animation</PageTitle>
+        <Animation />
       </Route>
       <Route path='/crafted/widgets/lists'>
         <PageTitle breadcrumbs={widgetsBreadCrumbs}>Lists</PageTitle>

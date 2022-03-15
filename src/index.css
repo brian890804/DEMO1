@@ -4,11 +4,14 @@ p{
 }
 
 .toolbar-fixed .toolbar{
-    z-index: 990!important;
+    z-index: 111!important;
 }
 .aside-enabled.aside-fixed.header-fixed .header{
-    z-index: 990!important;
+    z-index: 112!important;
 }
 .aside-fixed .aside{
-    z-index: 999!important;
-}
+    z-index: 115!important;
+} 
+.drawer {
+    z-index: 115!important;
+} 

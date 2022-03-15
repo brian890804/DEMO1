@@ -29,7 +29,7 @@ export interface MenuOptions {
 const defaultMenuOptions: MenuOptions = {
   dropdown: {
     hoverTimeout: 200,
-    zindex: 105,
+    zindex: 150,
   },
   accordion: {
     slideSpeed: 250,
