@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSpring, animated, config } from 'react-spring'
 
-export default function StarFlexibleAnimation({ strokeDasharray }) {
+export default function Pentagram({ strokeDasharray }) {
   return (
     <SVG strokeDasharray={strokeDasharray} />
   );

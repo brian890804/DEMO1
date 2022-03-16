@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { useSpring, animated, config } from 'react-spring'
 
-export default function FadeAnimation({showText}) {
+export default function Fade({showText}) {
     const [flip, set] = useState(false)
     const props = useSpring({
       to: { opacity: 1 },

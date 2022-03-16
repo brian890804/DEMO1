@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useMeasure from 'react-use-measure'
 import { useSpring, animated } from 'react-spring'
-
 import './Battery.css';
 
-export default function App() {
-    const [open, toggle] = useState(false)
+export default function App({division}) {
     const [ref, { width }] = useMeasure()
-    const props = useSpring({ width: open ? width : 0 })
+    const props = useSpring({  
+        loop: {reverse: true },
+        from: { width: 0 },
+        to: { width: width / (division && division) },
+        delay: 2000})
     return (
-            <div ref={ref} className={"main"} onClick={() => toggle(!open)}>
+            <div ref={ref} className={"main"}>
                 <animated.div className={"fill"} style={props}/>
                 <animated.div style={{
                     position: "absolute",

@@ -1,21 +1,33 @@
 import React from 'react'
-import StarFlexibleAnimation from '../../../../_metronic/partials/widgets/animation/StarFlexibleAnimation'
-import FadeAnimation from '../../../../_metronic/partials/widgets/animation/FadeAnimation'
-import BatteryAnimation from '../../../../_metronic/partials/widgets/animation/BatteryAnimation'
-import TrainsitionAnimation from '../../../../_metronic/partials/widgets/animation/TrainsitionAnimation'
+import Pentagram from '../../../../_metronic/partials/widgets/animation/Pentagram'
+import Fade from '../../../../_metronic/partials/widgets/animation/Fade'
+import Battery from '../../../../_metronic/partials/widgets/animation/Battery'
+import Traverse from '../../../../_metronic/partials/widgets/animation/Traverse'
+// import SqureZoomCircle from '../../../../_metronic/partials/widgets/animation/SqureZoomCircle'
+
 export default function Animation() {
     return (
         <>
-            <div className='row g-5 g-xl-8'>
-                <Layout title={<FadeAnimation showText={"描邊動畫"} />}>
-                    <StarFlexibleAnimation strokeDasharray={4} />
-                    <StarFlexibleAnimation strokeDasharray={20} />
-                    <StarFlexibleAnimation strokeDasharray={40} />
-                    <StarFlexibleAnimation strokeDasharray={150} />
+            <div className='row g-8 g-xl-8'>
+                <Layout title={<Fade showText={"描邊動畫"} />}>
+                    <Pentagram strokeDasharray={4} /> <Pentagram strokeDasharray={20} />
+                    <Pentagram strokeDasharray={40} /><Pentagram strokeDasharray={80} />
                 </Layout>
-                <Layout title={<FadeAnimation showText={"其他"} />}>
-                    <BatteryAnimation />
-                    {/* <TrainsitionAnimation NUM_TRANS={['0','2']}/> */}
+                <Layout title={<Fade showText={"填滿動畫"} />}>
+                    <Battery division={3} />
+                    <Battery division={2} />
+                    <Battery division={1} />
+                </Layout>
+            </div>
+            <div className='row g-5 g-xl-8'>
+                <Layout title={<Fade showText={"翻轉動畫"} />}>
+                    <Traverse />
+                    {/* <SqureZoomCircle/> */}
+                </Layout>
+                <Layout title={<Fade showText={"其他"} />}>
+                    <Battery division={3} />
+                    <Battery division={2} />
+                    <Battery division={1} />
                 </Layout>
             </div>
         </>
