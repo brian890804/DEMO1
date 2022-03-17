@@ -5,7 +5,7 @@ import Battery from '../../../../_metronic/partials/widgets/animation/Battery'
 import Traverse from '../../../../_metronic/partials/widgets/animation/Traverse'
 import SqureZoomCircle from '../../../../_metronic/partials/widgets/animation/SqureZoomCircle'
 import Svg from '../../../../_metronic/partials/widgets/animation/Svg'
-
+import Draggable from '../../../../_metronic/partials/widgets/animation/Draggable/Draggable'
 export default function Animation() {
     const [svg, set] = useState('active');
     useEffect(() => {
@@ -41,7 +41,7 @@ export default function Animation() {
             </div>
             <div className='row g-5 g-xl-8 '>
                 <Layout title={<Fade showText={"動畫"} />} >
-
+                    <Draggable items={[1,2,3,4]} />
                 </Layout>
                 <Layout title={<Fade showText={"點選動畫"} />}>
                 </Layout>
@@ -62,7 +62,7 @@ function Layout({ title, children }) {
                     </h3>
                 </div>
                 <div className='card-body py-3 '>
-                    <div className="row " style={{ height: '100%', justifyContent: 'center',padding:10}}>
+                    <div className="row " style={{ height: '100%', justifyContent: 'center', padding: 10 }}>
                         {children}
                     </div>
                 </div>
