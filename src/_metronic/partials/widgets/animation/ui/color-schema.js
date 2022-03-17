@@ -1,28 +1,26 @@
-export default [
+export default [  //eslint-disable-line
     {
-      name: "Red munsell",
+      name: "紅",
       background: "#ec0b43",
-      color: "#fff"
+      color: "#fff",
+      fontWeight:'600'
     },
     {
-      name: "Blue munsell",
-      background: "#048ba8",
-      color: "#fff"
-    },
-    {
-      name: "Caribbean green",
+      name: "青",
       background: "#16db93",
-      color: "#000"
+      color: "#fff",
+      fontWeight:'600'
     },
     {
-      name: "Maize",
+      name: "淡黃",
       background: "#efea5a",
-      color: "#000"
+      color: "#fff",
+      fontWeight:'600'
     },
     {
-      name: "Neon carrot",
+      name: "淡橘",
       background: "#f29e4c",
-      color: "#000"
+      color: "#fff",
+      fontWeight:'600'
     }
   ];
-  

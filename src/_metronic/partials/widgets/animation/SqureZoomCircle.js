@@ -4,26 +4,23 @@ import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
   Container,
-  Heading,
-  Typography,
   Flex,
   Grid,
   theme
 } from "./ui";
-import "./ui/molecules/global-styles/global.css";
+import { Button } from "react-bootstrap-v5";
 import colorScheme from "./ui/color-schema";
 
 const GridContainer = styled(Grid)`
   justify-content: center;
 `;
 GridContainer.defaultProps = {
-  // gridTemplateColumns: "repeat(5, minmax(200px, 1fr))",
   gridTemplateColumns: "repeat(auto-fit, 120px)",
   gridGap: 1
 };
 
 const AnimatedItem = styled(animated(Flex))`
-  cursor: pointer;
+  cursor: default;
 `;
 AnimatedItem.defaultProps = {
   justifyContent: "center",
@@ -37,8 +34,7 @@ AnimatedItem.defaultProps = {
 };
 
 export default function App() {
-  const [isHidden, setIsHidden] = useState(false);
-
+  const [isHidden, setIsHidden] = useState(true);
   const [springs, api] = useSprings(colorScheme.length, (index) => ({
     ...colorScheme[index],
     opacity: 1,
@@ -48,49 +44,35 @@ export default function App() {
   const handleOnClick = useCallback(() => {
     setIsHidden(!isHidden);
 
-    api.start((index) =>
+    api.start((_) =>
       isHidden
         ? {
-            opacity: 0.2,
-            borderRadius: "100%"
-          }
+          opacity: 0.2,
+          borderRadius: "100%"
+        }
         : {
-            opacity: 1,
-            borderRadius: "10%"
-          }
+          opacity: 1,
+          borderRadius: "10%"
+        }
     );
   }, [api, isHidden]);
 
   return (
     <ThemeProvider theme={theme}>
-      <Box bg="bg100" minHeight="100vh" py={1}>
+      <Box py={1}>   {/*bg="bg100"*/}
         <Container>
-          <Heading textAlign="center">
-            React Spring Example - useSprings
-          </Heading>
-          <Typography textAlign="center" pb={2}>
-            Click on the button to trigger animation
-          </Typography>
           <Box>
             <GridContainer pt={1}>
               <>
                 {springs.map((props, i) => (
-                  <AnimatedItem style={props}>{props.name}</AnimatedItem>
+                  <AnimatedItem style={props} key={i}>{props.name}</AnimatedItem>
                 ))}
               </>
             </GridContainer>
-            <Flex justifyContent="center">
-              <Box
-                as="button"
-                onClick={handleOnClick}
-                mt={3}
-                width={200}
-                height={48}
-                fontSize={24}
-              >
-                Click
-                {isHidden ? "Unhide" : "Hide"}
-              </Box>
+            <Flex justifyContent="center" pt={1}>
+              <Button type="outline" onClick={handleOnClick}variant='warning'>
+              {isHidden ? "顯示" : "隱藏"}
+              </Button>
             </Flex>
           </Box>
         </Container>

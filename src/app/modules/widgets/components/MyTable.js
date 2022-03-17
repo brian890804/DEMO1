@@ -4,13 +4,13 @@ import TableFooter from '@mui/material/TableFooter';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import MuiTablePagination from "@mui/material/TablePagination";
-import useStoreModal from '../../../../_metronic/alert/PromptModal'
+// import useStoreModal from '../../../../_metronic/alert/PromptModal'
 import Grow from '@mui/material/Grow';
 import Grid from '@mui/material/Grid';
 export default function MyTable() {
     const [columns, setColumns] = useState([]);
     const [control, setControl] = useState(false);
-    const { myTablePrompt } = useStoreModal();
+    // const { myTablePrompt } = useStoreModal();
     function createData(request, index) {
         // myTablePrompt();
         let data = columns;

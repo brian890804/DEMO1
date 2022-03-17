@@ -20,7 +20,7 @@ function SVG({ strokeDasharray }) {
 
   return (
     <animated.svg
-      style={{ width: 150, height: 150 }}
+      style={{ width: 150, height: 150,disaplay:'flex',alignContent:'center',justifyContent:'center' }}
       viewBox="-10 -10 120 120"
       strokeWidth="2"
       fill="white"

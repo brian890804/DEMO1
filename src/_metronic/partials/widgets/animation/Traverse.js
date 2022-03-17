@@ -1,25 +1,25 @@
 import React from "react";
 import { useSpring, animated, easings } from "react-spring";
 import Trainsition from "./Trainsition";
-export default function Traverse() {
+export default function Traverse({ reverse }) {
     const Traverse = useSpring({
         loop: { reverse: true },
-        from: { x: 0, rotateZ: 0, background: '#46e891', },
-        to: { x: 100, rotateZ: 100, background: '#277ef4', },
+        from: { x: 0, rotateZ: 0, background: '#ff3c00', },
+        to: { x: 50, rotateZ: 360, background: '#46e891', },
         config: {
-            duration: 2000,
+            duration: 1500,
             easing: easings.easeInOutQuart,
         },
     })
     const styles = useSpring({
-        loop: { reverse: true },
+        loop: reverse ? { reverse: true } : true,
         from: {
             rotateZ: 0,
-            background: '#277ef4'
+            background: '#ffd500'
         },
         to: {
             rotateZ: 360,
-            background: '#46e891'
+            background: '#f27a55'
         },
         config: {
             duration: 2000,
@@ -30,11 +30,10 @@ export default function Traverse() {
     return (
         <animated.div
             style={{
-                width: 100,
-                height: 100,
+                width: 70,
+                height: 70,
                 backgroundColor: '#46e891',
                 borderRadius: 16,
-                margin: 20,
                 overflow: 'hidden',
                 ...Traverse,
             }}
@@ -43,12 +42,12 @@ export default function Traverse() {
                 style={{
                     width: 50,
                     height: 50,
+                    marginTop: "20%",
+                    marginLeft: "5%",
                     backgroundColor: '#46e891',
                     borderRadius: 16,
-                    marginTop: 25,
-                    marginLeft: 25,
-                    position: 'absolute',
-                    padding:5,
+                    overflow: 'hidden',
+                    padding: 5,
                     ...styles,
                 }}
             >

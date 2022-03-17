@@ -20,7 +20,7 @@ export default function Trainsition() {
                     fontSize: 30,
                     opacity: opacity.to({ range: [0.0, 1.0], output: [0, 1] }),
                 }}>
-                😄
+                😬
             </animated.div>
         ) : (
             <animated.div
@@ -29,7 +29,7 @@ export default function Trainsition() {
                     fontSize: 30,
                     opacity: opacity.to({ range: [1.0, 0.0], output: [1, 0] }),
                 }}>
-                🤪
+                🤯
             </animated.div>
         )
     )

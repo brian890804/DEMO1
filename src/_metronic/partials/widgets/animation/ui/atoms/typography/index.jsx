@@ -3,7 +3,7 @@ import { Box } from "../box";
 
 import { compose, lineHeight } from "styled-system";
 
-export const composedHelpers = compose(lineHeight);
+const composedHelpers = compose(lineHeight);
 
 export const Typography = styled(Box)`
   ${composedHelpers}

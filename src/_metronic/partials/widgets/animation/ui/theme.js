@@ -80,6 +80,6 @@ export const theme = {
   radii: ["4px", "8px", "16px", "32px", "50%"]
 };
 
-export default {
+export default { //eslint-disable-line
   breakpoints
-};
+}; 

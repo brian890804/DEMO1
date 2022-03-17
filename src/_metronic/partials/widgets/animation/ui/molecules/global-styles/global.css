@@ -1,20 +1,4 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-  font-family: Roboto;
-  font-weight: 200;
-
-  background-color: #fff;
-  /* background-color:seagreen; */
-  color: #545469;
-  overflow-x: hidden;
-  line-height: 1.5;
-}
 
 /* .container > div > div {
   display: flex;
