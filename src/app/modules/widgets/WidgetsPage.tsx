@@ -34,6 +34,7 @@ const WidgetsPage: React.FC = () => {
         <Excel />
       </Route>
       <Route path='/crafted/widgets/carousel'>
+      <PageTitle breadcrumbs={widgetsBreadCrumbs}>Carousel</PageTitle>
         <MyCarousel />
       </Route>
       <Route path='/crafted/widgets/table'>
