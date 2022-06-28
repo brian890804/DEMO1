@@ -35,7 +35,7 @@ const MasterLayout: React.FC = ({ children }) => {
     <PageDataProvider>
       <div className='page d-flex flex-row flex-column-fluid'>
         <AsideDefault />
-        <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper'>
+        <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper' style={{ backgroundColor: '#EFF2F5' }}>
           <HeaderWrapper />
           <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
             <Toolbar />

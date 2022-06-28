@@ -12,11 +12,11 @@ import useStoreModal from '../../../../_metronic/alert/PromptModal'
 export default function Excel() {
     const [ExcelRead, setExcelRead] = useState('');
     const [Rows, setRows] = useState();
-    const { excelPrompt, excelUploadPrompt,excelUploadSuccessPrompt } = useStoreModal();
+    const { excelPrompt, excelUploadPrompt, excelUploadSuccessPrompt } = useStoreModal();
     const DownloadExcel = () => {
         saveAs(ExcelRead, `excel - ${new Date()}.xlsx`)
     }
-    console.log(Rows,'Rows')
+    console.log(Rows, 'Rows')
     React.useEffect(() => {
         excelPrompt()
     }, [])//eslint-disable-line
@@ -32,7 +32,7 @@ export default function Excel() {
                         >
                             <Grid container alignItems='center' justifyContent="center" sx={{ backgroundColor: '#3C3C3C', borderRadius: 2 }}>
                                 <Grid item xs={12} sx={{ p: 2, textAlign: 'left' }}  >
-                                    <InputFiles accept=".xlsx, .xls" onChange={(files) => { onImportExcel({ files, Rows, setRows, setExcelRead});excelUploadSuccessPrompt() }}>
+                                    <InputFiles accept=".xlsx, .xls" onChange={(files) => { onImportExcel({ files, Rows, setRows, setExcelRead }); excelUploadSuccessPrompt() }}>
                                         <Tooltip title={"上傳檔案"} >
                                             <NavigationIcon fontSize="large" style={{ cursor: 'pointer' }} color='primary' />
                                         </Tooltip>
