@@ -5,7 +5,7 @@ import Arrow from '@mui/icons-material/ArrowBackIosNew';
 import { toAbsoluteUrl } from '../../../../_metronic/helpers'
 function Layout({ children, CarouselRef }) {
     return (
-        <div style={{ width: '100%', height: "55vh", }}className='card'>
+        <div style={{ width: '100%', height: "55vh", }}>
             <div style={{ display: 'flex', height: "100%", justifyContent: 'center', flexDirection: 'row', width: '100%' }}>
                 <div className="col-2 my-auto ">
                     <IconButton onClick={() => CarouselRef.current.prev()}>
