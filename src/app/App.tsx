@@ -14,7 +14,7 @@ const App: React.FC<Props> = ({ basename }) => {
   useEffect(() => {
     setTimeout(() => setBGContorl(false), 5000)
   }, [])
-  return (
+  return ( 
     <Suspense fallback={<LayoutSplashScreen />}>
       <BrowserRouter basename={basename}>
         <I18nProvider>
