@@ -6,26 +6,14 @@ import { useGesture } from 'react-with-gesture'
 import { useSprings, animated, to } from 'react-spring'
 import './styles.css'
 
-// WHEN dragging, this function will be fed with all arguments.
-// OTHERWISE, only the list order is relevant.
 const fn = (order, down, originalIndex, curIndex, y) => index =>
   down && index === originalIndex
-    ? /*
-      No need to transition the following properties:
-      - z-index, the elevation of the item related to the root of the view; it should pop straight up to 1, from 0.
-      - y, the translated distance from the top; it's already being updated dinamically, smoothly, from react-gesture.
-      Thus immediate returns `true` for both.
-    */
-      { y: curIndex * 100 + y, scale: 1.1, zIndex: '1', shadow: 15, immediate: n => n === 'y' || n === 'zIndex' }
+    ?
+    { y: curIndex * 100 + y, scale: 1.1, zIndex: '1', shadow: 15, immediate: n => n === 'y' || n === 'zIndex' }
     : { y: order.indexOf(index) * 100, scale: 1, zIndex: '0', shadow: 1, immediate: false }
 
 export default function DraggableList({ items }) {
   const order = useRef(items.map((_, index) => index)) // Store indices as a local ref, this represents the item order
-  /*
-    Curries the default order for the initial, "rested" list state.
-    Only the order array is relevant when the items aren't being dragged, thus
-    the other arguments from fn don't need to be supplied initially.
-  */
   const [springs, setSprings] = useSprings(items.length, fn(order.current))
   const bind = useGesture(({ args: [originalIndex], down, delta: [, y] }) => {
     const curIndex = order.current.indexOf(originalIndex)
