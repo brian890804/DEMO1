@@ -48,7 +48,7 @@ export default function MyTable() {
         <div className='row g-12 g-xl-12'>
             <div className='col-xl-12'>
                 <div className='card card-xl-stretch mb-xl-12' style={{ minHeight: '300px' }}>
-                    <div className='card-body '>
+                    <div className='body '>
                         <Grow
                             in={true}
                             style={{ transformOrigin: '0 0 0' }}
