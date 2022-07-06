@@ -61,8 +61,8 @@ const WidgetsPage: React.FC = () => {
         <PageTitle breadcrumbs={widgetsBreadCrumbs}>Mixed</PageTitle>
         <Mixed />
       </Route>
-      <Route path='/crafted/widgets/tables'>
-        <PageTitle breadcrumbs={widgetsBreadCrumbs}>Tables</PageTitle>
+      <Route path='/crafted/widgets/Graphics'>
+        <PageTitle breadcrumbs={widgetsBreadCrumbs}>Graphics</PageTitle>
         <Tables />
       </Route>
       <Route path='/crafted/widgets/feeds'>
