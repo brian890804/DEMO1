@@ -11,6 +11,7 @@ import Excel from './components/Excel'
 import MyCarousel from './components/MyCarousel'
 import MyTable from './components/MyTable'
 import Animation from './components/Animation'
+import EventPage from '../../../_metronic/partials/widgets/Event/EventPage'
 const widgetsBreadCrumbs: Array<PageLink> = [
   {
     title: 'Widgets',
@@ -64,6 +65,10 @@ const WidgetsPage: React.FC = () => {
       <Route path='/crafted/widgets/Graphics'>
         <PageTitle breadcrumbs={widgetsBreadCrumbs}>Graphics</PageTitle>
         <Tables />
+      </Route>
+      <Route path='/crafted/widgets/Form/AddActivity'>
+        <PageTitle breadcrumbs={widgetsBreadCrumbs}>Form</PageTitle>
+        <EventPage />
       </Route>
       <Route path='/crafted/widgets/feeds'>
         <PageTitle breadcrumbs={widgetsBreadCrumbs}>Feeds</PageTitle>

@@ -41,6 +41,8 @@ export function AsideMenuMain() {
         <AsideMenuItem to='/crafted/widgets/charts' title={intl.formatMessage({ id: 'MENU.WIDGETS.CHART' })} hasBullet={true} />
         {/* <AsideMenuItem to='/crafted/widgets/mixed' title={intl.formatMessage({ id: 'MENU.WIDGETS.MIXED' })} hasBullet={true} /> */}
         <AsideMenuItem to='/crafted/widgets/Graphics' title={intl.formatMessage({ id: 'MENU.WIDGETS.GRAPHICS' })} hasBullet={true} />
+        <AsideMenuItem to='/crafted/widgets/Form/AddActivity' title={intl.formatMessage({ id: 'MENU.WIDGETS.Form' })} hasBullet={true} />
+        
         {/* <AsideMenuItem to='/crafted/widgets/feeds' title='Feeds' hasBullet={true} /> */}
       </AsideMenuItemWithSub>
       <div className='menu-item'>
